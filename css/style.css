@@ -10,7 +10,7 @@ body {
 
 /* Main Menu */
 .backgroundMainMenu {
-    display: flex;
+    display: none; /*flex*/
     align-items: center;
     justify-content: center;
     height: 100vh;
@@ -56,6 +56,7 @@ body {
 .button-long:hover {
     box-shadow: 0rem 0.5rem rgba(92, 45, 213, 1);
     border: 0.15rem solid rgba(92, 45, 213, 1);
+    cursor: pointer;
 }
 
 .button-pvsp img {
@@ -121,17 +122,108 @@ body {
     }
 }
 
-/* Rules */
+/* Rules --------------------------------*/
 .backgroundRules {
-    display: none;
+    display: flex; /*flex*/
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: rgba(121, 69, 255, 1);
 }
 
-/* Menu Start */
+.containerRules {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 35%;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 1rem 1rem 0 1rem;
+    border-radius: 2rem;
+    border: 0.15rem solid;
+    box-shadow: 0rem 0.5rem;
+}
+
+.containerRules h1 {
+    align-self: center;
+    font-size: 2.5rem;
+    margin: 0 0 1rem 0;
+}
+
+.containerRules h3 {
+    color: rgba(121, 69, 255, 1);
+    margin: 0.2rem 0;
+}
+
+ol.rulesList {
+    display: grid;
+    grid-template-columns: 1fr 20fr;
+    gap: 0.7rem;
+    list-style-type: none; 
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.rulesList span {
+    font-weight: bold;
+}
+
+.button-check {
+    width: 4rem;
+    align-self: center;
+    position: relative;
+    top: 2.3rem;
+}
+
+.button-check:hover {
+    cursor: pointer;
+}
+
+.button-check svg #Oval-Copy-37,
+.button-check svg #Oval-Copy-38 {
+    transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+.button-check:hover svg #Oval-Copy-37,
+.button-check:hover svg #Oval-Copy-38 {
+    fill: rgba(92, 45, 213, 1);
+}
+
+@media screen and (max-width: 1161px) {
+    .containerRules {
+        width: 45%;
+    }
+}
+
+@media screen and (max-width: 871px) {
+    .containerRules {
+        width: 55%;
+    }
+}
+
+@media screen and (max-width: 694px) {
+    .containerRules {
+        width: 65%;
+    }
+}
+
+@media screen and (max-width: 536px) {
+    .containerRules {
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 410px) {
+    .containerRules {
+        width: 95%;
+    }
+}
+
+/* Menu Start -------------------------------- */
 .backgroundMenuStart {
     display: none;
 }
 
-/* Game Board Start */
+/* Game Board Start -------------------------------- */
 .backgroundGameBoardStart {
     display: none;
 }
