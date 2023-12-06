@@ -3,22 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <script href="./js/app.js"></script>
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/logo.svg">
   
-  <title>Frontend Mentor | Connect Four game</title>
+  <title>Connect Four game | David Wesle</title>
 </head>
 <body>
 
   <!-- Main menu start -->
-
-   Play vs player
-   Game rules
+  <div class="backgroundMainMenu">
+    <div class="containerMainMenu">
+      <img class="logo" src="./assets/images/logo.svg" alt="Four-Game-Logo">
+      <button class="button-pvsp button-long">
+        <h2>PLAY VS PLAYER</h2>
+        <img src="./assets/images/player-vs-player.svg" alt="">
+      </button>
+      <button class="button-rules button-long">
+        <h2>GAME RULES</h2>
+      </button>
+    </div>
+  </div>
 
   <!-- Main menu end -->
 
   <!-- Rules start -->
-
+  <div class="backgroundRules">
   Rules
 
   Objective
@@ -32,21 +46,21 @@
   Players must alternate turns, and only one disc can be dropped in each turn. 
   The game ends when there is a 4-in-a-row or a stalemate.
   The starter of the previous game goes second on the next game.
-
+  </div>
   <!-- Rules end -->
 
   <!-- Ingame menu start -->
-
+  <div class="backgroundMenuStart">
   Pause
 
   Continue game
   Restart
   Quit game
-
+  </div>
   <!-- Ingame menu end -->
   
   <!-- Game board start -->
-
+  <div class="backgroundGameBoardStart">
   Menu
   Restart
 
@@ -58,7 +72,7 @@
 
   Wins
   Play again
-
+  </div>
   <!-- Game board end -->
 
 </body>

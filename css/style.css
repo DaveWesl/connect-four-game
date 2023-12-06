@@ -1,0 +1,137 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+}
+
+/* Main Menu */
+.backgroundMainMenu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: rgba(92, 45, 213, 1);
+}
+
+.containerMainMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    background-color: rgba(121, 69, 255, 1);
+    padding: 4rem;
+    border-radius: 2rem;
+    border: 0.15rem solid;
+    box-shadow: 0rem 0.5rem;
+}
+
+.logo {
+    width: 3rem;
+    margin-bottom: 4rem;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: rotate(15deg);
+}
+
+.button-pvsp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    background-color: rgba(255, 206, 103, 1);
+    margin-bottom: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0rem 0.5rem;
+    border: 0.15rem solid;
+}
+
+.button-long:hover {
+    box-shadow: 0rem 0.5rem rgba(92, 45, 213, 1);
+    border: 0.15rem solid rgba(92, 45, 213, 1);
+}
+
+.button-pvsp img {
+    width: 3.5rem;
+}
+
+.button-rules {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    box-shadow: 0rem 0.5rem;
+    background-color: rgba(255, 255, 255, 1);
+    width: 100%;
+    border: 0.15rem solid;
+}
+
+@media screen and (max-width: 1161px) {
+    .containerMainMenu {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 871px) {
+    .containerMainMenu {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 694px) {
+    .containerMainMenu {
+        width: 65%;
+    }
+}
+
+@media screen and (max-width: 536px) {
+    .containerMainMenu {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 410px) {
+    
+    .containerMainMenu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        background-color: rgba(92, 45, 213, 1);
+        padding: 0rem;
+        border-radius: none;
+        border: none;
+    }
+
+    .button-pvsp {
+        width: 90%;
+    }
+
+    .button-rules {
+        width: 90%;
+    }
+}
+
+/* Rules */
+.backgroundRules {
+    display: none;
+}
+
+/* Menu Start */
+.backgroundMenuStart {
+    display: none;
+}
+
+/* Game Board Start */
+.backgroundGameBoardStart {
+    display: none;
+}
