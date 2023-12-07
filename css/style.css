@@ -14,7 +14,7 @@ h1 {
 
 /* Main Menu */
 .backgroundMainMenu {
-    display: none; /*flex*/
+    display: flex; /*flex*/
     align-items: center;
     justify-content: center;
     height: 100vh;
@@ -174,11 +174,6 @@ ol.rulesList {
     cursor: pointer;
 }
 
-.button-check svg #Oval-Copy-37,
-.button-check svg #Oval-Copy-38 {
-    transition: fill 0.3s ease, stroke 0.3s ease;
-}
-
 .button-check:hover svg #Oval-Copy-37,
 .button-check:hover svg #Oval-Copy-38 {
     fill: rgba(92, 45, 213, 1);
@@ -297,7 +292,7 @@ ol.rulesList {
 }
 /* Game Board Start -------------------------------- */
 .backgroundGameBoardStart1 {
-    display: flex; /*flex*/
+    display: none; /*flex*/
     align-items: center;
     justify-content: center;
     width: 100vw;
