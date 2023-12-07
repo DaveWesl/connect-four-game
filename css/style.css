@@ -216,7 +216,7 @@ ol.rulesList {
 
 /* Menu Start -------------------------------- */
 .backgroundIngameMenu {
-    display: flex; /*flex*/
+    display: none; /*flex*/
     align-items: center;
     justify-content: center;
     height: 100vh;
@@ -296,6 +296,152 @@ ol.rulesList {
     }
 }
 /* Game Board Start -------------------------------- */
-.backgroundGameBoardStart {
+.backgroundGameBoardStart1 {
+    display: flex; /*flex*/
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(121, 69, 255, 1);
+}
+
+.backgroundGameBoardStart2 {
+    display: block;
+    background-color: rgba(92, 45, 213, 1);
+    width: 100%;
+    height: 20%;
+    border-top-left-radius: 3rem;
+    border-top-right-radius: 3rem;
+    z-index: 2;
+    position: absolute;
+    bottom: 0;
+}
+
+.containerGameBoardStart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem;
+    z-index: 5;
+}
+
+.containerIngameMenu2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 50vw;
+}
+
+.button-ingame {
+    background-color: rgba(92, 45, 213, 1);
+    color: rgba(255, 255, 255, 1);
+    border: none;
+    width: 30%;
+    height: 50%;
+    border-radius: 2rem;
+    font-size: 0.7rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.button-ingame:hover {
+    background-color: rgba(253, 102, 135, 1);
+}
+
+.logoIngame {
+    width: 2.5rem;
+}
+
+.containerGameBoard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80vw;
+}
+
+.containerMarkerBoardTime {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0rem;
+    width: 80%;
+}
+
+.marker {
+    width: 1.5rem;
+    padding-bottom: 0.1rem;
+}
+
+.marker-red {
+    margin-left: 38%;
+    display: flex;
+}
+
+.marker-yellow {
     display: none;
+}
+
+.boards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 87%;
+}
+
+.boardBlack {
+    width: 100%;
+    z-index: 3;
+}
+
+.boardWhite {
+    display: flex;
+    width: 100%;
+    z-index: 4;
+    margin-left: -100%;
+    margin-bottom: 1%;
+}
+
+.timeTurn {
+    position: relative;
+    bottom: 2rem;
+    width: 30%;
+    z-index: 5;
+}
+
+.timeTurn text {
+    fill: white;
+}
+
+.players {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 1);
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    border: 0.1rem solid;
+    border-radius: 1rem;
+    box-shadow: 0rem 0.25rem;
+    padding: 0 0 1rem 0;
+    margin-bottom: 3rem;
+}
+
+.players h2 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.players h3 {
+    margin: 0;
+    font-size: 0.7rem;
+}
+
+img.player-one,
+img.player-two {
+    width: 2rem;
+    position: relative;
+    bottom: 1rem;
 }

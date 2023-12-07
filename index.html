@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,9 +11,10 @@
   <script href="./js/app.js"></script>
 
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/logo.svg">
-  
+
   <title>Connect Four game | David Wesle</title>
 </head>
+
 <body>
 
   <!-- Main menu start -->
@@ -36,28 +38,34 @@
     <div class="containerRules">
       <h1>RULES</h1>
       <h3>OBJECTIVE</h3>
-      <p>Be the first player to connect 4 of the same colored discs in a row (either 
+      <p>Be the first player to connect 4 of the same colored discs in a row (either
         vertically, horizontally, or diagonally).</p>
       <h3>HOW TO PLAY</h3>
       <ol class="rulesList">
-        <span>1</span><li>Red goes first in the first game.</li>
-        <span>2</span><li>Players must alternate turns, and only one disc can be dropped in each turn.</li>
-        <span>3</span><li>The game ends when there is a 4-in-a-row or a stalemate.</li>
-        <span>4</span><li>The starter of the previous game goes second on the next game.</li>
+        <span>1</span>
+        <li>Red goes first in the first game.</li>
+        <span>2</span>
+        <li>Players must alternate turns, and only one disc can be dropped in each turn.</li>
+        <span>3</span>
+        <li>The game ends when there is a 4-in-a-row or a stalemate.</li>
+        <span>4</span>
+        <li>The starter of the previous game goes second on the next game.</li>
       </ol>
       <div class="button-check">
-        <svg width="70px" height="75px" viewBox="0 0 70 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <title>icon-check</title>
-            <g id="Designs" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g id="icon-check">
-                    <circle id="Oval-Copy-37" fill="#000000" cx="35" cy="35" r="35"></circle>
-                    <circle id="Oval-Copy-38" fill="#000000" cx="35" cy="40" r="35"></circle>
-                    <circle id="Oval-Copy-39" fill="#FD6687" cx="35" cy="35" r="32"></circle>
-                    <polyline id="Path" stroke="#FFFFFF" stroke-width="3" points="20 34.5819497 30.2640104 44.84596 50.1099704 25"></polyline>
-                </g>
+        <svg width="70px" height="75px" viewBox="0 0 70 75" version="1.1" xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink">
+          <title>icon-check</title>
+          <g id="Designs" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="icon-check">
+              <circle id="Oval-Copy-37" fill="#000000" cx="35" cy="35" r="35"></circle>
+              <circle id="Oval-Copy-38" fill="#000000" cx="35" cy="40" r="35"></circle>
+              <circle id="Oval-Copy-39" fill="#FD6687" cx="35" cy="35" r="32"></circle>
+              <polyline id="Path" stroke="#FFFFFF" stroke-width="3"
+                points="20 34.5819497 30.2640104 44.84596 50.1099704 25"></polyline>
             </g>
+          </g>
         </svg>
-    </div>
+      </div>
     </div>
   </div>
   <!-- Rules end -->
@@ -78,22 +86,41 @@
     </div>
   </div>
   <!-- Ingame menu end -->
-  
+
   <!-- Game board start -->
-  <div class="backgroundGameBoardStart">
-  Menu
-  Restart
-
-  Player 1
-  Player 2
-
-  Player 1's turn
-  Player 2's turn
-
-  Wins
-  Play again
+  <div class="backgroundGameBoardStart1">
+    <div class="containerGameBoardStart">
+      <div class="containerIngameMenu2">
+        <button class="button-menu button-ingame">MENU</button>
+        <img class="logoIngame" src="./assets/images/logo.svg" alt="Four-Game-Logo">
+        <button class="button-restart-ingame button-ingame">RESTART</button>
+      </div>
+      <div class="containerGameBoard">
+        <div class="players">
+          <img class="player-one" src="./assets/images/player-one.svg" alt="player-one">
+          <h3>PLAYER 1</h3>
+          <h2 class="pointsPlayer1">0</h2>
+        </div>
+        <div class="containerMarkerBoardTime">
+          <img class="marker marker-red" src="./assets/images/marker-red.svg" alt="marker-red">
+          <img class="marker marker-yellow" src="./assets/images/marker-yellow.svg" alt="marker-yellow">
+          <div class="boards">
+            <img class="boardBlack" src="./assets/images/board-layer-black-large.svg" alt="board-layer-black-large">
+            <img class="boardWhite" src="./assets/images/board-layer-white-large.svg" alt="board-layer-white-large">
+          </div>
+          <img class="timeTurn" src="./assets/images/turn-background-red.svg" alt="turn-background-red">
+        </div>
+        <div class="players">
+          <img class="player-two" src="./assets/images/player-two.svg" alt="player-two">
+          <h3>PLAYER 2</h3>
+          <h2 class="pointsPlayer1">0</h2>
+        </div>
+      </div>
+    </div>
+    <div class="backgroundGameBoardStart2"></div>
   </div>
   <!-- Game board end -->
 
 </body>
+
 </html>
