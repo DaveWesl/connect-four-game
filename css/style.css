@@ -292,7 +292,7 @@ ol.rulesList {
 }
 /* Game Board Start -------------------------------- */
 .backgroundGameBoardStart1 {
-    display: none; /*flex*/
+    display: flex; /*flex*/
     align-items: start;
     justify-content: center;
     height: 100vh;
@@ -407,7 +407,8 @@ ol.rulesList {
     fill: white;
 }
 
-.players {
+.containerPlayerOne,
+.containerPlayerTwo {
     display: flex;
     flex-direction: column;
     background-color: rgba(255, 255, 255, 1);
@@ -421,12 +422,14 @@ ol.rulesList {
     margin-bottom: 3rem;
 }
 
-.players h2 {
+.containerPlayerOne h2,
+.containerPlayerTwo h2 {
     margin: 0;
     font-size: 3rem;
 }
 
-.players h3 {
+.containerPlayerOne h3,
+.containerPlayerTwo h3 {
     margin: 0;
     font-size: 1rem;
 }
@@ -482,7 +485,8 @@ img.player-two {
         margin-top: -3.5rem;
     }
 
-    .players {
+    .containerPlayerOne,
+    .containerPlayerTwo {
         margin-left: 1rem;
         margin-right: 1rem;
     }
@@ -491,7 +495,16 @@ img.player-two {
 @media screen and (max-width: 982px) {
 
     * {
-        font-size: 20px;
+        font-size: 18px;
+    }
+
+    .backgroundGameBoardStart1 {
+        display: none; /*flex*/
+        align-items: center;
+    }
+
+    .containerGameBoardStart {
+        padding-top: 0rem;
     }
 
     .timeTurn {
@@ -500,6 +513,77 @@ img.player-two {
     }
 }
 
-@media screen and (max-width: 982px) {
-    
+@media screen and (max-width: 769px) {
+
+    .backgroundGameBoardStart2{
+        height: ;
+    }
+
+    .containerGameBoard {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        justify-content: center;
+        place-items: center;
+    }
+
+    .containerMarkerBoardTime{
+        order: 3;
+        grid-column: span 2;
+        width: 80%;
+    }
+
+    .timeTurn {
+        margin-top: -3rem;
+        width: 27%;
+
+    }
+
+    .containerPlayerOne {
+        order: 0;
+    }
+
+
+    .containerPlayerTwo {
+        order: 1;
+    }
+
+    .containerPlayerOne,
+    .containerPlayerTwo {
+        display: flex;
+        flex-direction: row;
+        background-color: rgba(255, 255, 255, 1);
+        align-items: center;
+        justify-content: center;
+        width: 60%;
+        border: 0.1rem solid;
+        border-radius: 1rem;
+        box-shadow: 0rem 0.25rem;
+        padding: 0.2rem 0.5rem;
+        margin-bottom: 0rem;
+    }
+
+    .containerPlayerOne h3 {
+        margin-right: 2.5rem;
+        margin-left: -2rem;
+    }
+
+    .containerPlayerTwo h3 {
+        order: 1;
+        margin-left: 2.5rem;
+        margin-right: -2rem;
+    }
+
+    img.player-one {
+        position: relative;
+        top: 0rem;
+        right: 3rem;
+    }
+
+    img.player-two {
+        order: 3;
+        position: relative;
+        top: 0rem;
+        left: 3rem;
+}
 }
