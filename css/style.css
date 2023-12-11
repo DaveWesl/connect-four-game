@@ -292,8 +292,8 @@ ol.rulesList {
 }
 /* Game Board Start -------------------------------- */
 .backgroundGameBoardStart1 {
-    display: flex; /*flex*/
-    align-items: start;
+    display: none; /*flex*/
+    align-items: center;
     justify-content: center;
     height: 100vh;
     background-color: rgba(121, 69, 255, 1);
@@ -381,7 +381,7 @@ ol.rulesList {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 87%;
+    width: 60%;
 }
 
 .boardBlack {
@@ -398,13 +398,9 @@ ol.rulesList {
 }
 
 .timeTurn {
-    margin-top: -4rem;
-    width: 25%;
+    margin-top: -2rem;
+    width: 17%;
     z-index: 5;
-}
-
-.timeTurn text {
-    fill: white;
 }
 
 .containerPlayerOne,
@@ -441,48 +437,10 @@ img.player-two {
     bottom: 1rem;
 }
 
-@media screen and (max-width: 1300px) {
-
-    .containerGameBoardStart {
-        padding-top: 5rem;
-    }
-    
-    .timeTurn {
-        margin-top: -3rem;
-    }
-}
-
-@media screen and (max-width: 1200px) {
-
-    .boards {
-        width: 95%;
-    }
-
-    .containerGameBoard{
-        width: 100%;
-    }   
-    
-    .timeTurn {
-        margin-top: -3rem;
-    }
-}
-
 @media screen and (max-width: 1100px) {
-
-    .containerGameBoardStart {
-        padding-top: 7rem;
-    }
 
     .containerIngameMenu2 {
         width: 55vw;
-    }
-
-    .boards {
-        width: 100%;
-    }
-    
-    .timeTurn {
-        margin-top: -3.5rem;
     }
 
     .containerPlayerOne,
@@ -490,33 +448,37 @@ img.player-two {
         margin-left: 1rem;
         margin-right: 1rem;
     }
+
+    .timeTurn {
+        margin-top: -1.3rem;
+        width: 25%;
+    }
+
+    .boards{
+        width: 65%;
+    }
 }
 
 @media screen and (max-width: 982px) {
 
     * {
-        font-size: 18px;
+        font-size: 12px;
     }
 
-    .backgroundGameBoardStart1 {
-        display: none; /*flex*/
-        align-items: center;
-    }
-
-    .containerGameBoardStart {
-        padding-top: 0rem;
-    }
-
-    .timeTurn {
-        margin-top: -2rem;
-        width: 30%;
+    .boards{
+        width: 70%;
     }
 }
 
 @media screen and (max-width: 769px) {
+    
+    * {
+        font-size: 18px;
+    }
 
-    .backgroundGameBoardStart2{
-        height: ;
+    .containerIngameMenu2 {
+        margin-bottom: 2rem;
+        width: 75vw;
     }
 
     .containerGameBoard {
@@ -530,22 +492,27 @@ img.player-two {
     .containerMarkerBoardTime{
         order: 3;
         grid-column: span 2;
+        width: 100%;
+    }
+
+    .boards{
         width: 80%;
     }
 
     .timeTurn {
-        margin-top: -3rem;
-        width: 27%;
-
+        margin-top: -2.5rem;
+        width: 25%;
     }
 
     .containerPlayerOne {
         order: 0;
+        justify-self: end;
     }
 
 
     .containerPlayerTwo {
         order: 1;
+        justify-self: start;
     }
 
     .containerPlayerOne,
@@ -563,27 +530,114 @@ img.player-two {
         margin-bottom: 0rem;
     }
 
+    .marker {
+        display: none;
+    }
+
     .containerPlayerOne h3 {
-        margin-right: 2.5rem;
-        margin-left: -2rem;
+        margin-right: 20%;
+        margin-left: -15%;
     }
 
     .containerPlayerTwo h3 {
         order: 1;
-        margin-left: 2.5rem;
-        margin-right: -2rem;
+        margin-left: 20%;
+        margin-right: -15%;
     }
 
     img.player-one {
         position: relative;
         top: 0rem;
-        right: 3rem;
+        right: 23%;
     }
 
     img.player-two {
         order: 3;
         position: relative;
         top: 0rem;
-        left: 3rem;
+        left: 23%;
 }
+}
+
+@media screen and (max-width: 600px) {
+
+    .timeTurn{
+        margin-top: -2rem;
+    }
+}
+
+@media screen and (max-width: 376px) {
+
+    * {
+        font-size: 12px;
+    }
+
+    .backgroundGameBoardStart2 {
+        height: 25%;
+        border-top-left-radius: 4rem;
+        border-top-right-radius: 4rem;
+    }
+
+    .containerPlayerOne,
+    .containerPlayerTwo {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin: 0;
+        width: 65%;
+    }
+
+    .containerPlayerOne {
+        margin-right: 1rem;
+    }
+
+    .containerPlayerTwo {
+        margin-left: 1rem;
+    }
+
+    .containerPlayerOne h3 {
+        order: 0;
+        margin: 0;
+    }
+
+    .containerPlayerTwo h3 {
+        order: 0;
+        margin: 0;
+    }
+
+    .boards {
+        width: 85%;
+        padding-top: 2rem;
+    }
+
+    .boardWhite {
+        margin-bottom: 4%;
+    }
+
+    img.player-one {
+        position: absolute;
+        top: 26.5%;
+        left: 9%;
+        width: 3.5rem;
+    }
+
+    img.player-two {
+        position: absolute;
+        top: 26.5%;
+        left: 80%;
+        width: 3.5rem;
+}
+
+    .timeTurn{
+        margin-top: -2.5rem;
+        width: 35%;
+    }
+}
+
+@media screen and (max-width: 329px) {
+    img.player-one,
+    img.player-two {
+        display: none;
+    }
 }
