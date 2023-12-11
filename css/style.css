@@ -1,11 +1,11 @@
 * {
     box-sizing: border-box;
-    font-family: 'Space Grotesk', sans-serif;
     font-size: 16px;
 }
 
 body {
     margin: 0;
+    font-family: 'Space Grotesk', sans-serif;
 }
 
 h1 {
@@ -14,7 +14,7 @@ h1 {
 
 /* Main Menu */
 .backgroundMainMenu {
-    display: flex; /*flex*/
+    display: none; /*flex*/
     align-items: center;
     justify-content: center;
     height: 100vh;
@@ -292,7 +292,7 @@ ol.rulesList {
 }
 /* Game Board Start -------------------------------- */
 .backgroundGameBoardStart1 {
-    display: none; /*flex*/
+    display: flex; /*flex*/
     align-items: center;
     justify-content: center;
     height: 100vh;
@@ -352,6 +352,7 @@ ol.rulesList {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 
 .containerMarkerBoardTime {
@@ -360,7 +361,7 @@ ol.rulesList {
     align-items: center;
     justify-content: center;
     padding: 1rem 0 0 0;
-    width: 57%;
+    width: 80%;
 }
 
 .marker {
@@ -377,31 +378,66 @@ ol.rulesList {
     display: none;
 }
 
-.boards {
+.board {
+    display: grid;
+    grid-template-rows: repeat(6, 2.5rem);
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem; 
+    z-index: 3;
+    background-color: white;
+    padding-bottom: 1.5rem;
+    padding-top: 0.7rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.3rem;
+    border: 0.1rem solid black;
+}
+
+.column {
+    display: grid;
+    grid-template-columns: repeat(7, 2.5rem);
+    gap: 0.5rem;
+}
+
+.cell {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid #000;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 60%;
-}
-
-.boardBlack {
-    width: 100%;
-    z-index: 3;
-}
-
-.boardWhite {
-    display: flex;
-    width: 100%;
-    z-index: 4;
-    margin-left: -100%;
-    margin-bottom: 1%;
-}
+    background-color: rgba(121, 69, 255, 1);
+    box-shadow: 0rem -0.3rem;
+    border: 0.1rem solid black;
+  }
 
 .timeTurn {
-    margin-top: -2rem;
-    width: 17%;
+    background-color: rgba(253, 102, 135, 1);
+    border-top-right-radius: 7rem;
+    border-top-left-radius: 7rem;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    border: 0.1rem solid black;
+    box-shadow: 0px 0.3rem black;
+    margin-top: -1rem;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     z-index: 5;
-}
+    color: white;
+    padding: 1rem 1rem 0 1rem;
+  }
+
+  .timeTurn h1 {
+    margin: 0;
+  }
+  
 
 .containerPlayerOne,
 .containerPlayerTwo {
@@ -410,7 +446,7 @@ ol.rulesList {
     background-color: rgba(255, 255, 255, 1);
     align-items: center;
     justify-content: center;
-    width: 12%;
+    width: 20%;
     border: 0.1rem solid;
     border-radius: 1rem;
     box-shadow: 0rem 0.25rem;
@@ -439,23 +475,15 @@ img.player-two {
 
 @media screen and (max-width: 1100px) {
 
-    .containerIngameMenu2 {
-        width: 55vw;
+    .containerMarkerBoardTime {
+        width: 60%;
     }
 
     .containerPlayerOne,
     .containerPlayerTwo {
         margin-left: 1rem;
         margin-right: 1rem;
-    }
-
-    .timeTurn {
-        margin-top: -1.3rem;
-        width: 25%;
-    }
-
-    .boards{
-        width: 65%;
+        width: 20%;
     }
 }
 
@@ -463,10 +491,6 @@ img.player-two {
 
     * {
         font-size: 12px;
-    }
-
-    .boards{
-        width: 70%;
     }
 }
 
@@ -495,13 +519,22 @@ img.player-two {
         width: 100%;
     }
 
-    .boards{
-        width: 80%;
+    .board {
+        grid-template-rows: repeat(6, 4rem);
     }
+    
+    .column {
+        grid-template-columns: repeat(7, 4rem);
+    }
+    
+    .cell {
+        width: 3.5rem;
+        height: 3.5rem;
+      }
 
     .timeTurn {
-        margin-top: -2.5rem;
-        width: 25%;
+        margin-top: -1rem;
+        width: 40%;
     }
 
     .containerPlayerOne {
@@ -522,7 +555,7 @@ img.player-two {
         background-color: rgba(255, 255, 255, 1);
         align-items: center;
         justify-content: center;
-        width: 60%;
+        width: 70%;
         border: 0.1rem solid;
         border-radius: 1rem;
         box-shadow: 0rem 0.25rem;
@@ -604,15 +637,6 @@ img.player-two {
     .containerPlayerTwo h3 {
         order: 0;
         margin: 0;
-    }
-
-    .boards {
-        width: 85%;
-        padding-top: 2rem;
-    }
-
-    .boardWhite {
-        margin-bottom: 4%;
     }
 
     img.player-one {
