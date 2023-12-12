@@ -418,10 +418,10 @@ ol.rulesList {
 
 .timeTurn {
     background-color: rgba(253, 102, 135, 1);
-    border-top-right-radius: 7rem;
-    border-top-left-radius: 7rem;
-    border-bottom-left-radius: 2rem;
-    border-bottom-right-radius: 2rem;
+    border-top-right-radius: 4rem;
+    border-top-left-radius: 4rem;
+    border-bottom-left-radius: 5rem;
+    border-bottom-right-radius: 5rem;
     border: 0.1rem solid black;
     box-shadow: 0px 0.3rem black;
     margin-top: -1rem;
@@ -439,8 +439,41 @@ ol.rulesList {
   .timeTurn h1 {
     margin: 0;
   }
-  
 
+  .timeTurn h2 {
+    margin: 0;
+    font-size: 0.7rem;
+  }
+
+  .winner {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    padding: 0.8rem;
+    width: 50%;
+    border-radius: 2rem;
+    z-index: 6;
+    border: 0.1rem solid black;
+    box-shadow: 0px 0.3rem black;
+    margin-top: -1rem;
+  }
+
+  .winner h1 {
+    margin: 0;
+  }
+
+  .winner h2 {
+    margin: 0;
+    font-size: 0.7rem;
+  }
+
+  .button-again {
+    width: 70%;
+    font-size: 0.9rem;
+  }
+  
 .containerPlayerOne,
 .containerPlayerTwo {
     display: flex;
@@ -492,6 +525,10 @@ img.player-two {
 @media screen and (max-width: 1200px) {
 
     .containerMarkerBoardTime {
+        width: 60%;
+    }
+
+    .winner {
         width: 60%;
     }
 
@@ -633,6 +670,11 @@ img.player-two {
 }
 
 @media screen and (max-width: 450px) {
+
+    .winner {
+        width: 80%;
+    }
+
     .board {
         grid-template-rows: repeat(6, 3rem);
     }
