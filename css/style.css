@@ -403,6 +403,18 @@ ol.rulesList {
     gap: 0.5rem;
 }
 
+.stone1 {
+    width: 2rem;
+    height: 2rem;
+    background-color: black;
+}
+
+.stone2 {
+    width: 2rem;
+    height: 2rem;
+    background-color: red;
+}
+
 .column {
     width: 3rem;
     height: 3rem;
