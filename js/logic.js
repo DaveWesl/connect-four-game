@@ -173,3 +173,7 @@ function checkWin(player) {
 // Starte den Timer für den ersten Spieler
 startTimer();
 displayBoard();
+
+
+//computer player
+//color winner
