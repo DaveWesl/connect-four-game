@@ -4,6 +4,8 @@ let currentPlayer = 1; // Spieler 1 beginnt
 const gameBoard = Array.from({ length: rows }, () => Array(columns).fill(null));
 let timerInterval;
 let currentPlayerTime = 30; // Zeit in Sekunden für jeden Spieler
+let currentPoints1 = 0;
+let currentPoints2 = 0;
 
 function displayBoard() {
     const gameBoardElement = document.querySelector('.board');
@@ -64,15 +66,65 @@ function playerTurn(player) {
     }
 }
 
-document.querySelector('.button-restart').addEventListener('click', playAgain);
-document.querySelector('.button-restart-ingame').addEventListener('click', playAgain);
-//const backgroundMainMenuElement = document.querySelector('.backgroundMainMenu');
-//const backgroundIngameMenuElement = document.querySelector('.backgroundIngameMenu');
-function playAgain() {
-    backgroundIngameMenuElement.style.display = 'none';
-    backgroundMainMenuElement.style.display = 'flex';
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector('.button-restart').addEventListener('click', restart);
+    document.querySelector('.button-restart-ingame').addEventListener('click', restart);
+});
+
+const currentPoints1Element = document.querySelector('.pointsPlayer1');
+const currentPoints2Element = document.querySelector('.pointsPlayer2');
+
+const winnerElement = document.querySelector('.winner');
+const timeElement = document.querySelector('.timeTurn');
+
+function restart() {
+    // Assuming these are defined somewhere in your code
+    const backgroundIngameMenuElement1 = document.querySelector('.backgroundIngameMenu');
+    const backgroundGameBoardStart1Element1 = document.querySelector('.backgroundGameBoardStart1');
+
+    // Reset display styles
+    backgroundIngameMenuElement1.style.display = 'none';
+    backgroundGameBoardStart1Element1.style.display = 'flex';
+
+    // Reset scores
+    currentPoints1 = 0;
+    currentPoints1Element.innerHTML = currentPoints1;
+
+    currentPoints2 = 0;
+    currentPoints2Element.innerHTML = currentPoints2;
+
+    winnerElement.style.display = 'none';
+    timeElement.style.display = 'flex';
+
+    currentPlayerTime = 30;
+
+    backgroundWinnerElement.style.backgroundColor = 'rgba(92, 45, 213, 1)';
+
+    // Reset game board
+    gameBoard.forEach(row => row.fill(null));
+
+    // Update the board display
+    displayBoard();
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector('.button-again').addEventListener('click', playAgain);
+});
+
+function playAgain() {
+    winnerElement.style.display = 'none';
+    timeElement.style.display = 'flex';
+
+    backgroundWinnerElement.style.backgroundColor = 'rgba(92, 45, 213, 1)';
+
+    // Reset game board
+    gameBoard.forEach(row => row.fill(null));
+    // Update the board display
+    displayBoard();
+}
+
+
+const backgroundWinnerElement = document.querySelector('.backgroundGameBoardStart2');
 // Funktion zum Hinzufügen eines Steins in die nächste freie Zeile
 function addStone(row, col, player) {
     // Erstelle ein neues div-Element für den Stein
@@ -89,20 +141,20 @@ function addStone(row, col, player) {
 
         // Überprüfe auf Gewinner
         if (checkWin(player)) {
-            const winnerElement = document.querySelector('.winner');
-            const timeElement = document.querySelector('.timeTurn');
             timeElement.style.display = 'none';
             winnerElement.style.display = 'flex';
             const h2Element = winnerElement.querySelector('h2');
             h2Element.textContent = `PLAYER ${player}`;
-            const backgroundWinnerElement = document.querySelector('.backgroundGameBoardStart2');
             if (player === 1) {
                 backgroundWinnerElement.style.backgroundColor = 'rgba(253, 102, 135, 1)';
+                currentPoints1 += 1
+                currentPoints1Element.innerHTML = currentPoints1;
             } else {
                 backgroundWinnerElement.style.backgroundColor = 'rgba(255, 206, 103, 1)';
-            };
-
+                currentPoints2Element.innerHTML = currentPoints2 += 1;
+            }
         }
+        
         // Hier kannst du weitere Aktionen für das Ende des Spiels hinzufügen
     }
 }
@@ -226,8 +278,3 @@ function checkWin(player) {
 // Starte den Timer für den ersten Spieler
 startTimer();
 displayBoard();
-
-
-//computer player
-//color winner
-//Test
