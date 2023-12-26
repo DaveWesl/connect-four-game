@@ -51,26 +51,54 @@ function displayBoard() {
     const currentPlayerElement = document.querySelector('.currentPlayer');
     currentPlayerElement.textContent = `PLAYER ${currentPlayer}'S TURN`;
     timerElement.textContent = `${currentPlayerTime}s`;
+    playerTurn(currentPlayer);
+}
+
+
+function playerTurn(player) {
+    const timeElement = document.querySelector('.timeTurn');
+    if (player === 1) {
+        timeElement.style.backgroundColor = 'rgba(253, 102, 135, 1)';
+    } else {
+        timeElement.style.backgroundColor = 'rgba(255, 206, 103, 1)';
+    }
 }
 
 // Funktion zum Hinzufügen eines Steins in die nächste freie Zeile
 function addStone(row, col, player) {
     // Erstelle ein neues div-Element für den Stein
-    const stoneElement = document.createElement('div');
-    stoneElement.className = player === 1 ? 'stone1' : 'stone2';
+    if (!checkWin(1) && !checkWin(2)) {
+        const stoneElement = document.createElement('div');
+        stoneElement.className = player === 1 ? 'stone1' : 'stone2';
 
-    // Füge das div-Element dem DOM hinzu
-    const columnElement = document.querySelector(`.row:nth-child(${row + 1}) .column:nth-child(${col + 1})`);
-    columnElement.appendChild(stoneElement);
+        // Füge das div-Element dem DOM hinzu
+        const columnElement = document.querySelector(`.row:nth-child(${row + 1}) .column:nth-child(${col + 1})`);
+        columnElement.appendChild(stoneElement);
 
-    // Setze das div-Element in der gameBoard-Matrix
-    gameBoard[row][col] = stoneElement;
+        // Setze das div-Element in der gameBoard-Matrix
+        gameBoard[row][col] = stoneElement;
 
-    if (checkWin(player)) {
-        alert(`Spieler ${player} hat gewonnen!`);
+        // Überprüfe auf Gewinner
+        if (checkWin(player)) {
+            const winnerElement = document.querySelector('.winner');
+            const timeElement = document.querySelector('.timeTurn');
+            timeElement.style.display = 'none';
+            winnerElement.style.display = 'flex';
+            const h2Element = winnerElement.querySelector('h2');
+            h2Element.textContent = `PLAYER ${player}`;
+            const backgroundWinnerElement = document.querySelector('.backgroundGameBoardStart2');
+            if (player === 1) {
+                backgroundWinnerElement.style.backgroundColor = 'rgba(253, 102, 135, 1)';
+            } else {
+                backgroundWinnerElement.style.backgroundColor = 'rgba(255, 206, 103, 1)';
+            };
+
+        }
         // Hier kannst du weitere Aktionen für das Ende des Spiels hinzufügen
     }
 }
+
+
 
 // Funktion zum Suchen der nächsten freien Zeile in einer Spalte
 function findNextFreeRow(col) {
