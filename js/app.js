@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.button-menu').addEventListener('click', openIngameMenu);
     document.querySelector('.button-continue').addEventListener('click', openGameBoardContinue);
     document.querySelector('.button-quit').addEventListener('click', openMainMenuQuit);
+    document.querySelector('.button-pvscpu').addEventListener('click', openGameBoardCPU);
 });
 
 const backgroundRulesElement = document.querySelector('.backgroundRules');
@@ -22,9 +23,16 @@ function openMainMenu() {
     backgroundMainMenuElement.style.display = 'flex';
 }
 
+let cpu = 0;
 function openGameBoard() {
     backgroundMainMenuElement.style.display = 'none';
     backgroundGameBoardStart1Element.style.display = 'flex';
+
+    cpuImg.src = './assets/images/player-two.svg';
+    playerTwoHeading.textContent = 'PLAYER 2';
+
+    currentPlayerTime = 30;
+    cpu = 0;
 }
 
 function openIngameMenu() {
@@ -40,4 +48,21 @@ function openGameBoardContinue() {
 function openMainMenuQuit() {
     backgroundIngameMenuElement.style.display = 'none';
     backgroundMainMenuElement.style.display = 'flex';
+}
+
+//CPU
+const cpuImg = document.querySelector('.containerPlayerTwo .player-two');
+
+// Zugriff auf das h3-Element
+const playerTwoHeading = document.querySelector('.containerPlayerTwo .cpu');
+
+function openGameBoardCPU() {
+    backgroundMainMenuElement.style.display = 'none';
+    backgroundGameBoardStart1Element.style.display = 'flex';
+
+    cpuImg.src = './assets/images/cpu.svg';
+    playerTwoHeading.textContent = 'CPU';
+
+    currentPlayerTime = 30;
+    cpu = 1;
 }

@@ -51,7 +51,14 @@ function displayBoard() {
     // Füge ein h1-Element für die Timer-Anzeige hinzu
     const timerElement = document.querySelector('.timer');
     const currentPlayerElement = document.querySelector('.currentPlayer');
-    currentPlayerElement.textContent = `PLAYER ${currentPlayer}'S TURN`;
+    if(cpu === 0){
+        currentPlayerElement.textContent = `PLAYER ${currentPlayer}'S TURN`;
+    } 
+    if (cpu === 1 && currentPlayer === 1) {
+        currentPlayerElement.textContent = `PLAYER ${currentPlayer}'S TURN`;
+    } else if(cpu === 1 && currentPlayer === 2) {
+        currentPlayerElement.textContent = `CPU'S TURN`;
+    }
     timerElement.textContent = `${currentPlayerTime}s`;
     playerTurn(currentPlayer);
 }
@@ -125,6 +132,7 @@ function playAgain() {
 
 
 const backgroundWinnerElement = document.querySelector('.backgroundGameBoardStart2');
+
 // Funktion zum Hinzufügen eines Steins in die nächste freie Zeile
 function addStone(row, col, player) {
     // Erstelle ein neues div-Element für den Stein
@@ -144,7 +152,14 @@ function addStone(row, col, player) {
             timeElement.style.display = 'none';
             winnerElement.style.display = 'flex';
             const h2Element = winnerElement.querySelector('h2');
-            h2Element.textContent = `PLAYER ${player}`;
+            if(cpu === 0){
+                h2Element.textContent = `PLAYER ${player}`;
+            } 
+            if (cpu === 1 && currentPlayer === 1) {
+                h2Element.textContent = `PLAYER ${player}`;
+            } else if(cpu === 1 && currentPlayer === 2) {
+                h2Element.textContent = 'THE CPU';
+            }
             if (player === 1) {
                 backgroundWinnerElement.style.backgroundColor = 'rgba(253, 102, 135, 1)';
                 currentPoints1 += 1
@@ -180,7 +195,14 @@ function startTimer() {
             currentPlayerTime--;
             const timerElement = document.querySelector('.timer');
             const currentPlayerElement = document.querySelector('.currentPlayer');
-            currentPlayerElement.textContent = `PLAYER ${currentPlayer}'S TURN`;
+            if(cpu === 0){
+                currentPlayerElement.textContent = `PLAYER ${currentPlayer}'S TURN`;
+            } 
+            if (cpu === 1 && currentPlayer === 1) {
+                currentPlayerElement.textContent = `PLAYER ${currentPlayer}'S TURN`;
+            } else if(cpu === 1 && currentPlayer === 2) {
+                currentPlayerElement.textContent = `CPU'S TURN`;
+            }
             timerElement.textContent = `${currentPlayerTime}s`;
 
             if (currentPlayerTime === 0) {
