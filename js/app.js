@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.button-menu').addEventListener('click', openIngameMenu);
     document.querySelector('.button-continue').addEventListener('click', openGameBoardContinue);
     document.querySelector('.button-quit').addEventListener('click', openMainMenuQuit);
-    document.querySelector('.button-restart').addEventListener('click', openMainMenuQuit);
 });
 
 const backgroundRulesElement = document.querySelector('.backgroundRules');

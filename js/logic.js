@@ -64,6 +64,15 @@ function playerTurn(player) {
     }
 }
 
+document.querySelector('.button-restart').addEventListener('click', playAgain);
+document.querySelector('.button-restart-ingame').addEventListener('click', playAgain);
+//const backgroundMainMenuElement = document.querySelector('.backgroundMainMenu');
+//const backgroundIngameMenuElement = document.querySelector('.backgroundIngameMenu');
+function playAgain() {
+    backgroundIngameMenuElement.style.display = 'none';
+    backgroundMainMenuElement.style.display = 'flex';
+}
+
 // Funktion zum Hinzufügen eines Steins in die nächste freie Zeile
 function addStone(row, col, player) {
     // Erstelle ein neues div-Element für den Stein
@@ -146,6 +155,10 @@ function checkWin(player) {
                 gameBoard[row][col + 2]?.classList.contains(`stone${player}`) &&
                 gameBoard[row][col + 3]?.classList.contains(`stone${player}`)
             ) {
+                gameBoard[row][col].classList.add(`winningStone${player}`);
+                gameBoard[row][col + 1]?.classList.add(`winningStone${player}`);
+                gameBoard[row][col + 2]?.classList.add(`winningStone${player}`);
+                gameBoard[row][col + 3]?.classList.add(`winningStone${player}`);
                 return true;
             }
         }
@@ -160,6 +173,10 @@ function checkWin(player) {
                 gameBoard[row + 2][col]?.classList.contains(`stone${player}`) &&
                 gameBoard[row + 3][col]?.classList.contains(`stone${player}`)
             ) {
+                gameBoard[row][col].classList.add(`winningStone${player}`);
+                gameBoard[row + 1][col]?.classList.add(`winningStone${player}`);
+                gameBoard[row + 2][col]?.classList.add(`winningStone${player}`);
+                gameBoard[row + 3][col]?.classList.add(`winningStone${player}`);
                 return true;
             }
         }
@@ -174,6 +191,10 @@ function checkWin(player) {
                 gameBoard[row + 2][col + 2]?.classList.contains(`stone${player}`) &&
                 gameBoard[row + 3][col + 3]?.classList.contains(`stone${player}`)
             ) {
+                gameBoard[row][col].classList.add(`winningStone${player}`);
+                gameBoard[row + 1][col + 1].classList.add(`winningStone${player}`);
+                gameBoard[row + 2][col + 2].classList.add(`winningStone${player}`);
+                gameBoard[row + 3][col + 3].classList.add(`winningStone${player}`);
                 return true;
             }
         }
@@ -188,6 +209,10 @@ function checkWin(player) {
                 gameBoard[row + 2][col - 2]?.classList.contains(`stone${player}`) &&
                 gameBoard[row + 3][col - 3]?.classList.contains(`stone${player}`)
             ) {
+                gameBoard[row][col].classList.add(`winningStone${player}`);
+                gameBoard[row + 1][col - 1].classList.add(`winningStone${player}`);
+                gameBoard[row + 2][col - 2].classList.add(`winningStone${player}`);
+                gameBoard[row + 3][col - 3].classList.add(`winningStone${player}`);
                 return true;
             }
         }
