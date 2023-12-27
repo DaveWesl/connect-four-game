@@ -25,20 +25,23 @@ function displayBoard() {
             // Hinzufügen eines Event-Listeners für den Klick auf die Zelle
             columnElement.addEventListener('click', () => {
                 // Hier wird die ausgewählte Spalte ermittelt
-                const selectedCol = col;
+                if (!(cpu === 1 && currentPlayer === 2)) {
+                    const selectedCol = col;
 
-                // Hier wird die nächste freie Zeile für den Stein ermittelt
-                const nextFreeRow = findNextFreeRow(selectedCol);
+                    // Hier wird die nächste freie Zeile für den Stein ermittelt
+                    const nextFreeRow = findNextFreeRow(selectedCol);
 
-                if (nextFreeRow !== -1) {
-                    // Füge den Stein hinzu und aktualisiere die Anzeige
-                    addStone(nextFreeRow, selectedCol, currentPlayer);
-                    // Wechsle den Spieler und setze die Timer-Zeit zurück
-                    currentPlayer = currentPlayer === 1 ? 2 : 1;
-                    currentPlayerTime = 30;
-                    // Starte den Timer für den nächsten Spieler
-                    startTimer();
-                    displayBoard();
+                    if (nextFreeRow !== -1) {
+                        // Füge den Stein hinzu und aktualisiere die Anzeige
+                        addStone(nextFreeRow, selectedCol, currentPlayer);
+                        // Wechsle den Spieler und setze die Timer-Zeit zurück
+                        currentPlayer = currentPlayer === 1 ? 2 : 1;
+                        currentPlayerTime = 30;
+
+                        // Starte den Timer für den nächsten Spieler
+                        startTimer();
+                        displayBoard();
+                    }
                 }
             });
 
@@ -46,6 +49,24 @@ function displayBoard() {
         }
 
         gameBoardElement.appendChild(rowElement);
+}
+    if (cpu === 1 && currentPlayer === 2) {
+        // Simulieren Sie eine Verzögerung zwischen 3 und 8 Sekunden
+        const delay = Math.floor(Math.random() * (8000 - 3000 + 1)) + 3000;
+
+        setTimeout(() => {
+            // Führen Sie die Aktion für cpu === 1 && currentPlayer === 2 durch
+            const selectedCol = Math.floor(Math.random() * columns);
+            const nextFreeRow = findNextFreeRow(selectedCol);
+
+            if (nextFreeRow !== -1) {
+                addStone(nextFreeRow, selectedCol, currentPlayer);
+                currentPlayer = currentPlayer === 1 ? 2 : 1;
+                currentPlayerTime = 30;
+                startTimer();
+                displayBoard();
+            }
+        }, delay);
     }
 
     // Füge ein h1-Element für die Timer-Anzeige hinzu

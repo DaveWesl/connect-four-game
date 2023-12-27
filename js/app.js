@@ -33,6 +33,7 @@ function openGameBoard() {
 
     currentPlayerTime = 30;
     cpu = 0;
+    restart()
 }
 
 function openIngameMenu() {
@@ -70,4 +71,5 @@ function openGameBoardCPU() {
 
     currentPlayerTime = 30;
     cpu = 1;
+    restart()
 }
