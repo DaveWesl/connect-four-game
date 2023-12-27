@@ -52,9 +52,11 @@ function openMainMenuQuit() {
 
 //CPU
 const cpuImg = document.querySelector('.containerPlayerTwo .player-two');
+const playerImg = document.querySelector('.containerPlayerOne .player-one');
 
 // Zugriff auf das h3-Element
 const playerTwoHeading = document.querySelector('.containerPlayerTwo .cpu');
+const playerOneHeading = document.querySelector('.containerPlayerOne .you');
 
 function openGameBoardCPU() {
     backgroundMainMenuElement.style.display = 'none';
@@ -62,6 +64,9 @@ function openGameBoardCPU() {
 
     cpuImg.src = './assets/images/cpu.svg';
     playerTwoHeading.textContent = 'CPU';
+
+    playerImg.src = './assets/images/you.svg';
+    playerOneHeading.textContent = 'YOU';
 
     currentPlayerTime = 30;
     cpu = 1;
