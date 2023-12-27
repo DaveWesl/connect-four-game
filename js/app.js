@@ -31,9 +31,14 @@ function openGameBoard() {
     cpuImg.src = './assets/images/player-two.svg';
     playerTwoHeading.textContent = 'PLAYER 2';
 
+    playerImg.src = './assets/images/player-one.svg';
+    playerOneHeading.textContent = 'PLAYER 1';
+
     currentPlayerTime = 30;
     cpu = 0;
     restart()
+    startTimer();
+    displayBoard();
 }
 
 function openIngameMenu() {
@@ -72,4 +77,6 @@ function openGameBoardCPU() {
     currentPlayerTime = 30;
     cpu = 1;
     restart()
+    startTimer();
+    displayBoard();
 }

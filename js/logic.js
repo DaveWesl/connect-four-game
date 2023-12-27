@@ -11,6 +11,8 @@ function displayBoard() {
     const gameBoardElement = document.querySelector('.board');
     gameBoardElement.innerHTML = '';
 
+    document.addEventListener('mousemove', positionMarkerOnMouseMove);
+
     for (let row = 0; row < rows; row++) {
         const rowElement = document.createElement('div');
         rowElement.className = 'row';
@@ -41,18 +43,48 @@ function displayBoard() {
                         // Starte den Timer für den nächsten Spieler
                         startTimer();
                         displayBoard();
+                        positionMarker(selectedCol);
                     }
                 }
             });
+            columnElement.style.cursor = 'pointer';
 
             rowElement.appendChild(columnElement);
         }
 
         gameBoardElement.appendChild(rowElement);
 }
+    
     if (cpu === 1 && currentPlayer === 2) {
+       cpuTurn();
+    }
+
+    const timerElement = document.querySelector('.timer');
+    const currentPlayerElement = document.querySelector('.currentPlayer');
+    if (currentPlayer === 1) {
+        markerYellowElement.style.display = 'none';
+        markerRedElement.style.display = 'flex';
+    }
+    if(cpu === 0){
+        currentPlayerElement.textContent = `PLAYER ${currentPlayer}'S TURN`;
+    } 
+    if (cpu === 1 && currentPlayer === 1) {
+        currentPlayerElement.textContent = `PLAYER ${currentPlayer}'S TURN`;
+    } else if(cpu === 1 && currentPlayer === 2) {
+        currentPlayerElement.textContent = `CPU'S TURN`;
+        markerRedElement.style.display = 'none';
+        markerYellowElement.style.display = 'none';
+    }
+    timerElement.textContent = `${currentPlayerTime}s`;
+    playerTurn(currentPlayer);
+}
+
+
+
+//CPU Logik
+function cpuTurn() {
         // Simulieren Sie eine Verzögerung zwischen 3 und 8 Sekunden
-        const delay = Math.floor(Math.random() * (8000 - 3000 + 1)) + 3000;
+        const delay = Math.floor(Math.random() * (6000 - 1000 + 1)) + 1000;
 
         setTimeout(() => {
             // Führen Sie die Aktion für cpu === 1 && currentPlayer === 2 durch
@@ -67,23 +99,61 @@ function displayBoard() {
                 displayBoard();
             }
         }, delay);
-    }
-
-    // Füge ein h1-Element für die Timer-Anzeige hinzu
-    const timerElement = document.querySelector('.timer');
-    const currentPlayerElement = document.querySelector('.currentPlayer');
-    if(cpu === 0){
-        currentPlayerElement.textContent = `PLAYER ${currentPlayer}'S TURN`;
-    } 
-    if (cpu === 1 && currentPlayer === 1) {
-        currentPlayerElement.textContent = `PLAYER ${currentPlayer}'S TURN`;
-    } else if(cpu === 1 && currentPlayer === 2) {
-        currentPlayerElement.textContent = `CPU'S TURN`;
-    }
-    timerElement.textContent = `${currentPlayerTime}s`;
-    playerTurn(currentPlayer);
 }
 
+
+//Marker Positionierung
+const markerRedElement = document.querySelector('.marker-red');
+const markerYellowElement = document.querySelector('.marker-yellow');
+const boardElement = document.querySelector('.board');
+
+function positionMarkerOnMouseMove(event) {
+    const verticalOffset = 12;
+    const horizontalOffset = -11;
+
+    // Berechne die Position der Maus relativ zum Spielfeld
+    const mouseX = event.clientX - boardElement.getBoundingClientRect().left;
+    const mouseY = event.clientY - boardElement.getBoundingClientRect().top;
+
+    // Ermittle die Spalte, über der sich die Maus befindet
+    const selectedCol = Math.floor(mouseX / (boardElement.offsetWidth / columns));
+
+    // Berechne die Position der ausgewählten Spalte relativ zum Spielfeld
+    const selectedColumn = boardElement.querySelector(`.column:nth-child(${selectedCol + 1})`);
+    const offsetLeft = selectedColumn.offsetLeft;
+    const offsetTop = selectedColumn.offsetTop;
+    
+    // Setze die Position des Markers über der ausgewählten Spalte mit vertikalem und horizontalem Offset
+    markerRedElement.style.left = `${offsetLeft - horizontalOffset}px`;
+    markerRedElement.style.top = `${offsetTop - markerRedElement.offsetHeight - verticalOffset}px`;
+
+    // Setze die Position des Yellow Markers
+    markerYellowElement.style.left = `${offsetLeft - horizontalOffset}px`;
+    markerYellowElement.style.top = `${offsetTop - markerYellowElement.offsetHeight - verticalOffset}px`;
+}
+
+function positionMarker(selectedCol) {
+    const verticalOffset = 12;
+    const horizontalOffset = -11;
+
+    // Berechne die Position der ausgewählten Spalte relativ zum Spielfeld
+    const selectedColumn = boardElement.querySelector(`.column:nth-child(${selectedCol + 1})`);
+    const offsetLeft = selectedColumn.offsetLeft;
+    const offsetTop = selectedColumn.offsetTop;
+
+    if (currentPlayer === 1) {
+        // Setze die Position des Markers über der ausgewählten Spalte
+        markerYellowElement.style.display = 'none';
+        markerRedElement.style.display = 'flex';
+        markerRedElement.style.left = `${offsetLeft - horizontalOffset}px`;
+        markerRedElement.style.top = `${offsetTop - markerRedElement.offsetHeight - verticalOffset}px`; 
+    } else if(cpu === 0 && currentPlayer === 2){
+        markerRedElement.style.display = 'none';
+        markerYellowElement.style.display = 'flex';
+        markerYellowElement.style.left = `${offsetLeft - horizontalOffset}px`;
+        markerYellowElement.style.top = `${offsetTop - markerRedElement.offsetHeight - verticalOffset}px`; 
+    }
+}
 
 function playerTurn(player) {
     const timeElement = document.querySelector('.timeTurn');
@@ -106,7 +176,6 @@ const winnerElement = document.querySelector('.winner');
 const timeElement = document.querySelector('.timeTurn');
 
 function restart() {
-    // Assuming these are defined somewhere in your code
     const backgroundIngameMenuElement1 = document.querySelector('.backgroundIngameMenu');
     const backgroundGameBoardStart1Element1 = document.querySelector('.backgroundGameBoardStart1');
 
@@ -145,6 +214,8 @@ function playAgain() {
 
     backgroundWinnerElement.style.backgroundColor = 'rgba(92, 45, 213, 1)';
 
+    currentPlayerTime = 30;
+
     // Reset game board
     gameBoard.forEach(row => row.fill(null));
     // Update the board display
@@ -167,6 +238,8 @@ function addStone(row, col, player) {
 
         // Setze das div-Element in der gameBoard-Matrix
         gameBoard[row][col] = stoneElement;
+
+        positionMarker(col);
 
         // Überprüfe auf Gewinner
         if (checkWin(player)) {

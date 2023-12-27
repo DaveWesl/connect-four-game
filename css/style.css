@@ -335,6 +335,7 @@ ol.rulesList {
     justify-content: space-between;
     align-items: center;
     width: 50vw;
+    margin-bottom: 1.5rem;
 }
 
 .button-ingame {
@@ -375,12 +376,12 @@ ol.rulesList {
 
 .marker {
     width: 1.5rem;
-    padding-bottom: 0.1rem;
+    padding-bottom: 0;
+    position: absolute;
 }
 
 .marker-red {
-    margin-left: 38%;
-    display: flex;
+    display: none;
 }
 
 .marker-yellow {
@@ -562,6 +563,10 @@ img.player-two {
 
       .marker {
         display: none;
+      }
+
+      .containerIngameMenu2 {
+        margin-bottom: 0;
       }
 }
 
