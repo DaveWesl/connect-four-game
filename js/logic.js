@@ -1,16 +1,35 @@
+// Game configuration
 const rows = 6;
 const columns = 7;
-let currentPlayer = 1; // Spieler 1 beginnt
+let currentPlayer = 1; 
 const gameBoard = Array.from({ length: rows }, () => Array(columns).fill(null));
 let timerInterval;
-let currentPlayerTime = 30; // Zeit in Sekunden für jeden Spieler
+let currentPlayerTime = 30;
 let currentPoints1 = 0;
 let currentPoints2 = 0;
 
+// Elements
+const timeElement = document.querySelector('.timeTurn');
+const timerElement = document.querySelector('.timer');
+const currentPlayerElement = document.querySelector('.currentPlayer');
+const markerRedElement = document.querySelector('.marker-red');
+const markerYellowElement = document.querySelector('.marker-yellow');
+const currentPoints1Element = document.querySelector('.pointsPlayer1');
+const currentPoints2Element = document.querySelector('.pointsPlayer2');
+const winnerElement = document.querySelector('.winner');
+const backgroundWinnerElement = document.querySelector('.backgroundGameBoardStart2');
+
+// Event listeners
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector('.button-restart').addEventListener('click', restart);
+    document.querySelector('.button-restart-ingame').addEventListener('click', restart);
+    document.querySelector('.button-again').addEventListener('click', playAgain);
+});
+
+// Initialize game board
 function displayBoard() {
     const gameBoardElement = document.querySelector('.board');
     gameBoardElement.innerHTML = '';
-
     document.addEventListener('mousemove', positionMarkerOnMouseMove);
 
     for (let row = 0; row < rows; row++) {
@@ -20,27 +39,15 @@ function displayBoard() {
         for (let col = 0; col < columns; col++) {
             const columnElement = document.createElement('div');
             columnElement.className = 'column';
-
-            // Änderung hier: Setze den Textinhalt als DOM-Element
             columnElement.appendChild(gameBoard[row][col] !== null ? gameBoard[row][col] : document.createTextNode(''));
-
-            // Hinzufügen eines Event-Listeners für den Klick auf die Zelle
             columnElement.addEventListener('click', () => {
-                // Hier wird die ausgewählte Spalte ermittelt
                 if (!(cpu === 1 && currentPlayer === 2)) {
                     const selectedCol = col;
-
-                    // Hier wird die nächste freie Zeile für den Stein ermittelt
                     const nextFreeRow = findNextFreeRow(selectedCol);
 
                     if (nextFreeRow !== -1) {
-                        // Füge den Stein hinzu und aktualisiere die Anzeige
                         addStone(nextFreeRow, selectedCol, currentPlayer);
-                        // Wechsle den Spieler und setze die Timer-Zeit zurück
-                        currentPlayer = currentPlayer === 1 ? 2 : 1;
                         currentPlayerTime = 30;
-
-                        // Starte den Timer für den nächsten Spieler
                         startTimer();
                         displayBoard();
                         positionMarker(selectedCol);
@@ -48,133 +55,120 @@ function displayBoard() {
                 }
             });
             columnElement.style.cursor = 'pointer';
-
             rowElement.appendChild(columnElement);
         }
 
         gameBoardElement.appendChild(rowElement);
-}
+    }
     
+    clearInterval(cpuTimerInterval); // Clear the existing CPU timer interval
     if (cpu === 1 && currentPlayer === 2) {
-       cpuTurn();
+        cpuTurn();
     }
 
-    const timerElement = document.querySelector('.timer');
-    const currentPlayerElement = document.querySelector('.currentPlayer');
-    if (currentPlayer === 1) {
-        markerYellowElement.style.display = 'none';
-        markerRedElement.style.display = 'flex';
-    }
-    if(cpu === 0){
-        currentPlayerElement.textContent = `PLAYER ${currentPlayer}'S TURN`;
-    } 
-    if (cpu === 1 && currentPlayer === 1) {
-        currentPlayerElement.textContent = `PLAYER ${currentPlayer}'S TURN`;
-    } else if(cpu === 1 && currentPlayer === 2) {
-        currentPlayerElement.textContent = `CPU'S TURN`;
-        markerRedElement.style.display = 'none';
-        markerYellowElement.style.display = 'none';
-    }
-    timerElement.textContent = `${currentPlayerTime}s`;
     playerTurn(currentPlayer);
 }
 
 
+// Player Turn Function
+function playerTurn(player) {
+    // Set background color based on the current player
+    timeElement.style.backgroundColor = player === 1 ? 'rgba(253, 102, 135, 1)' : 'rgba(255, 206, 103, 1)';
 
-//CPU Logik
+    // Update marker display
+    if (player === 1) {
+        markerYellowElement.style.display = 'none';
+        markerRedElement.style.display = 'flex';
+    } else {
+        markerRedElement.style.display = 'none';
+        markerYellowElement.style.display = 'flex';
+    }
+
+    // Update player and timer information
+    if (cpu === 0 || (cpu === 1 && player === 1)) {
+        currentPlayerElement.textContent = `PLAYER ${player}'S TURN`;
+    } else if (cpu === 1 && player === 2) {
+        currentPlayerElement.textContent = `CPU'S TURN`;
+        markerRedElement.style.display = 'none';
+        markerYellowElement.style.display = 'none';
+    }
+
+    timerElement.textContent = `${currentPlayerTime}s`;
+}
+
+// CPU Logic
+let cpuTimerInterval; // Declare a separate timer interval for CPU turn
+
 function cpuTurn() {
-        // Simulieren Sie eine Verzögerung zwischen 3 und 8 Sekunden
+    if (currentPlayer === 2) {
+
         const delay = Math.floor(Math.random() * (6000 - 1000 + 1)) + 1000;
 
-        setTimeout(() => {
-            // Führen Sie die Aktion für cpu === 1 && currentPlayer === 2 durch
+        cpuTimerInterval = setTimeout(() => {
             const selectedCol = Math.floor(Math.random() * columns);
             const nextFreeRow = findNextFreeRow(selectedCol);
 
             if (nextFreeRow !== -1) {
                 addStone(nextFreeRow, selectedCol, currentPlayer);
-                currentPlayer = currentPlayer === 1 ? 2 : 1;
                 currentPlayerTime = 30;
                 startTimer();
                 displayBoard();
             }
         }, delay);
+    }
 }
 
 
-//Marker Positionierung
-const markerRedElement = document.querySelector('.marker-red');
-const markerYellowElement = document.querySelector('.marker-yellow');
+// Marker Positioning
 const boardElement = document.querySelector('.board');
 
 function positionMarkerOnMouseMove(event) {
     const verticalOffset = 12;
     const horizontalOffset = -11;
 
-    // Berechne die Position der Maus relativ zum Spielfeld
     const mouseX = event.clientX - boardElement.getBoundingClientRect().left;
     const mouseY = event.clientY - boardElement.getBoundingClientRect().top;
 
-    // Ermittle die Spalte, über der sich die Maus befindet
     const selectedCol = Math.floor(mouseX / (boardElement.offsetWidth / columns));
 
-    // Berechne die Position der ausgewählten Spalte relativ zum Spielfeld
-    const selectedColumn = boardElement.querySelector(`.column:nth-child(${selectedCol + 1})`);
-    const offsetLeft = selectedColumn.offsetLeft;
-    const offsetTop = selectedColumn.offsetTop;
-    
-    // Setze die Position des Markers über der ausgewählten Spalte mit vertikalem und horizontalem Offset
-    markerRedElement.style.left = `${offsetLeft - horizontalOffset}px`;
-    markerRedElement.style.top = `${offsetTop - markerRedElement.offsetHeight - verticalOffset}px`;
+    // Check if selectedCol is a valid index
+    if (selectedCol >= 0 && selectedCol < columns) {
+        const selectedColumn = boardElement.querySelector(`.column:nth-child(${selectedCol + 1})`);
+        const offsetLeft = selectedColumn.offsetLeft;
+        const offsetTop = selectedColumn.offsetTop;
 
-    // Setze die Position des Yellow Markers
-    markerYellowElement.style.left = `${offsetLeft - horizontalOffset}px`;
-    markerYellowElement.style.top = `${offsetTop - markerYellowElement.offsetHeight - verticalOffset}px`;
+        markerRedElement.style.left = `${offsetLeft - horizontalOffset}px`;
+        markerRedElement.style.top = `${offsetTop - markerRedElement.offsetHeight - verticalOffset}px`;
+
+        markerYellowElement.style.left = `${offsetLeft - horizontalOffset}px`;
+        markerYellowElement.style.top = `${offsetTop - markerYellowElement.offsetHeight - verticalOffset}px`;
+    }
 }
+
 
 function positionMarker(selectedCol) {
     const verticalOffset = 12;
     const horizontalOffset = -11;
 
-    // Berechne die Position der ausgewählten Spalte relativ zum Spielfeld
     const selectedColumn = boardElement.querySelector(`.column:nth-child(${selectedCol + 1})`);
     const offsetLeft = selectedColumn.offsetLeft;
     const offsetTop = selectedColumn.offsetTop;
 
     if (currentPlayer === 1) {
-        // Setze die Position des Markers über der ausgewählten Spalte
         markerYellowElement.style.display = 'none';
         markerRedElement.style.display = 'flex';
         markerRedElement.style.left = `${offsetLeft - horizontalOffset}px`;
-        markerRedElement.style.top = `${offsetTop - markerRedElement.offsetHeight - verticalOffset}px`; 
-    } else if(cpu === 0 && currentPlayer === 2){
+        markerRedElement.style.top = `${offsetTop - markerRedElement.offsetHeight - verticalOffset}px`;
+    } else if (cpu === 0 && currentPlayer === 2) {
         markerRedElement.style.display = 'none';
         markerYellowElement.style.display = 'flex';
         markerYellowElement.style.left = `${offsetLeft - horizontalOffset}px`;
-        markerYellowElement.style.top = `${offsetTop - markerRedElement.offsetHeight - verticalOffset}px`; 
+        markerYellowElement.style.top = `${offsetTop - markerRedElement.offsetHeight - verticalOffset}px`;
     }
 }
 
-function playerTurn(player) {
-    const timeElement = document.querySelector('.timeTurn');
-    if (player === 1) {
-        timeElement.style.backgroundColor = 'rgba(253, 102, 135, 1)';
-    } else {
-        timeElement.style.backgroundColor = 'rgba(255, 206, 103, 1)';
-    }
-}
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelector('.button-restart').addEventListener('click', restart);
-    document.querySelector('.button-restart-ingame').addEventListener('click', restart);
-});
-
-const currentPoints1Element = document.querySelector('.pointsPlayer1');
-const currentPoints2Element = document.querySelector('.pointsPlayer2');
-
-const winnerElement = document.querySelector('.winner');
-const timeElement = document.querySelector('.timeTurn');
-
+// Restart Function
 function restart() {
     const backgroundIngameMenuElement1 = document.querySelector('.backgroundIngameMenu');
     const backgroundGameBoardStart1Element1 = document.querySelector('.backgroundGameBoardStart1');
@@ -194,6 +188,7 @@ function restart() {
     timeElement.style.display = 'flex';
 
     currentPlayerTime = 30;
+    currentPlayer = 1;
 
     backgroundWinnerElement.style.backgroundColor = 'rgba(92, 45, 213, 1)';
 
@@ -204,10 +199,7 @@ function restart() {
     displayBoard();
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelector('.button-again').addEventListener('click', playAgain);
-});
-
+// Play Again Function
 function playAgain() {
     winnerElement.style.display = 'none';
     timeElement.style.display = 'flex';
@@ -222,41 +214,38 @@ function playAgain() {
     displayBoard();
 }
 
-
-const backgroundWinnerElement = document.querySelector('.backgroundGameBoardStart2');
-
-// Funktion zum Hinzufügen eines Steins in die nächste freie Zeile
+// Function to add a stone in the next free row
 function addStone(row, col, player) {
-    // Erstelle ein neues div-Element für den Stein
+    // Create a new div element for the stone
     if (!checkWin(1) && !checkWin(2)) {
         const stoneElement = document.createElement('div');
         stoneElement.className = player === 1 ? 'stone1' : 'stone2';
 
-        // Füge das div-Element dem DOM hinzu
+        // Append the div element to the DOM
         const columnElement = document.querySelector(`.row:nth-child(${row + 1}) .column:nth-child(${col + 1})`);
         columnElement.appendChild(stoneElement);
 
-        // Setze das div-Element in der gameBoard-Matrix
+        // Set the div element in the gameBoard matrix
         gameBoard[row][col] = stoneElement;
 
         positionMarker(col);
 
-        // Überprüfe auf Gewinner
+        // Check for a winner
         if (checkWin(player)) {
             timeElement.style.display = 'none';
             winnerElement.style.display = 'flex';
             const h2Element = winnerElement.querySelector('h2');
-            if(cpu === 0){
+            if (cpu === 0) {
                 h2Element.textContent = `PLAYER ${player}`;
-            } 
+            }
             if (cpu === 1 && currentPlayer === 1) {
                 h2Element.textContent = `PLAYER ${player}`;
-            } else if(cpu === 1 && currentPlayer === 2) {
+            } else if (cpu === 1 && currentPlayer === 2) {
                 h2Element.textContent = 'THE CPU';
             }
             if (player === 1) {
                 backgroundWinnerElement.style.backgroundColor = 'rgba(253, 102, 135, 1)';
-                currentPoints1 += 1
+                currentPoints1 += 1;
                 currentPoints1Element.innerHTML = currentPoints1;
             } else {
                 backgroundWinnerElement.style.backgroundColor = 'rgba(255, 206, 103, 1)';
@@ -264,8 +253,28 @@ function addStone(row, col, player) {
             }
         }
         
-        // Hier kannst du weitere Aktionen für das Ende des Spiels hinzufügen
+        currentPlayer = currentPlayer === 1 ? 2 : 1;
+    }    
+
+    if (isBoardFull()) {
+        timeElement.style.display = 'none';
+        winnerElement.style.display = 'flex';
+        const h2Element = winnerElement.querySelector('h2');
+        const h1Element = winnerElement.querySelector('h1');
+        h2Element.textContent = 'WE HAVE A';
+        h1Element.textContent = 'TIE';
     }
+}
+
+function isBoardFull() {
+    for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < columns; col++) {
+            if (gameBoard[row][col] === null) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 
@@ -277,7 +286,6 @@ function findNextFreeRow(col) {
             return row;
         }
     }
-    // Wenn keine freie Zeile gefunden wurde, wird -1 zurückgegeben
     return -1;
 }
 
