@@ -87,24 +87,36 @@ h1 {
 @media screen and (max-width: 1161px) {
     .containerMainMenu {
         width: 40%;
+        padding: 1rem;
     }
 }
 
 @media screen and (max-width: 871px) {
     .containerMainMenu {
         width: 50%;
+        padding: 1rem;
     }
 }
 
 @media screen and (max-width: 694px) {
     .containerMainMenu {
         width: 65%;
+        padding: 1rem;
     }
 }
+
 
 @media screen and (max-width: 536px) {
     .containerMainMenu {
         width: 85%;
+    }
+
+    .containerMainMenu {        
+        padding: 1rem;
+    }
+
+    .logo {
+        margin-bottom: 2rem;
     }
 }
 
@@ -123,7 +135,8 @@ h1 {
         box-shadow: none;
     }
 
-    .button-pvsp {
+    .button-pvsp,
+    .button-pvscpu {
         width: 90%;
     }
 
@@ -132,6 +145,12 @@ h1 {
     }
 }
 
+@media screen and (max-width: 180px) {
+    .button-pvsp,
+    .button-pvscpu {
+        font-size: 10px;
+    }
+}
 /* Rules --------------------------------*/
 .backgroundRules {
     display: none; /*flex*/
