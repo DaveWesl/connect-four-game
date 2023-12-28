@@ -74,14 +74,18 @@ function displayBoard() {
 function playerTurn(player) {
     // Set background color based on the current player
     timeElement.style.backgroundColor = player === 1 ? 'rgba(253, 102, 135, 1)' : 'rgba(255, 206, 103, 1)';
+    // Get the viewport width
+    const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
 
-    // Update marker display
-    if (player === 1) {
-        markerYellowElement.style.display = 'none';
-        markerRedElement.style.display = 'flex';
-    } else {
-        markerRedElement.style.display = 'none';
-        markerYellowElement.style.display = 'flex';
+    // Check if the viewport width is less than or equal to 769 pixels
+    if (viewportWidth >= 769) {
+        if (player === 1) {
+            markerYellowElement.style.display = 'none';
+            markerRedElement.style.display = 'flex';
+        } else {
+            markerRedElement.style.display = 'none';
+            markerYellowElement.style.display = 'flex';
+        }
     }
 
     // Update player and timer information
@@ -154,14 +158,11 @@ function positionMarker(selectedCol) {
     const offsetLeft = selectedColumn.offsetLeft;
     const offsetTop = selectedColumn.offsetTop;
 
+
     if (currentPlayer === 1) {
-        markerYellowElement.style.display = 'none';
-        markerRedElement.style.display = 'flex';
         markerRedElement.style.left = `${offsetLeft - horizontalOffset}px`;
         markerRedElement.style.top = `${offsetTop - markerRedElement.offsetHeight - verticalOffset}px`;
     } else if (cpu === 0 && currentPlayer === 2) {
-        markerRedElement.style.display = 'none';
-        markerYellowElement.style.display = 'flex';
         markerYellowElement.style.left = `${offsetLeft - horizontalOffset}px`;
         markerYellowElement.style.top = `${offsetTop - markerRedElement.offsetHeight - verticalOffset}px`;
     }
