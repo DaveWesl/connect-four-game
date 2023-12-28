@@ -3,6 +3,10 @@
     font-size: 16px;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
     margin: 0;
     font-family: 'Space Grotesk', sans-serif;
@@ -304,7 +308,7 @@ ol.rulesList {
     display: flex; /*flex*/
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 100%;
     background-color: rgba(121, 69, 255, 1);
 }
 
@@ -706,6 +710,17 @@ img.player-two {
     
     * {
         font-size: 10px;
+    }
+}
+
+@media screen and (min-width: 769px) and (min-height: 510px) {  
+    
+    * {
+        font-size: 16px;
+    }
+
+    .containerGameBoardStart{
+        padding-top: 0;
     }
 }
 
